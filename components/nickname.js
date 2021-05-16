@@ -1,9 +1,20 @@
+import { useState } from 'react'
+import { useGameContext } from '../context/state'
+
 export default function Nickname() {
+  const { step, setStep, setNickname } = useGameContext()
+
+  const saveNickname = async (event) => {
+    event.preventDefault()
+
+    setNickname(event.target.nickname.value)
+  }
+
   return (
     <div className="h-screen flex flex-wrap content-center justify-center">
       <div>
         <h2 className="text-4xl text-center font-bold my-6">Wordcloud game</h2>
-        <form>
+        <form onSubmit={ saveNickname }>
           <input
             type="text"
             name="nickname"
