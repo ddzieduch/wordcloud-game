@@ -35,7 +35,7 @@ export default function Question(questions) {
         <h2 className="text-2xl text-center font-bold my-6">{ question }</h2>
         <div className="md:w-3/5 h-2/3 m-2 mx-auto mb-6 border p-8 md:p-16 border-gray-200 rounded flex flex-wrap sm:space-x-24 font-bold">
           {all_words.map((word, index) => (
-            <span onClick={checkWord} className="p-4 relative cursor-pointer">
+            <span onClick={checkWord} key={index} className="p-4 relative cursor-pointer">
               { word }
             </span>
           ))}
