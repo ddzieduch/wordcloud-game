@@ -9,6 +9,22 @@ export default function Question(questions) {
   let good_words = questions.questions[1].good_words
   let bad_words = all_words.filter((word) => good_words.indexOf(word) == -1)
 
+  const checkWord = (event) => {
+    if (step == 1) {
+      if (chosenWords.indexOf(event.target.textContent) == -1) {
+        setChosenWords([...chosenWords, event.target.textContent])
+      } else {
+        setChosenWords(chosenWords.filter((word) => word != event.target.textContent))
+      }
+      event.target.classList.toggle('selected')
+    }
+  }
+
+  const checkAnswers = () => {
+
+    setStep(step + 1)
+  }
+
   const calculateScore = () => {
     let wrong_answers = chosenWords.filter((word) => good_words.indexOf(word) == -1)
     let good_answers = chosenWords.filter((word) => bad_words.indexOf(word) == -1)
@@ -19,14 +35,7 @@ export default function Question(questions) {
     console.log('Omitted answers ' + omitted_answers)
 
     setScore(good_answers.length * 2 - (wrong_answers.length + omitted_answers.length))
-  }
-
-  const checkWord = (event) => {
-    if (chosenWords.indexOf(event.target.textContent) == -1) {
-      setChosenWords([...chosenWords, event.target.textContent])
-    } else {
-      setChosenWords(chosenWords.filter((word) => word != event.target.textContent))
-    }
+    setStep(step + 1)
   }
 
   return (
@@ -42,11 +51,10 @@ export default function Question(questions) {
         </div>
         <p className="text-center">
           <button
-            onClick={ calculateScore }
+            onClick={ step == 1 ? checkAnswers : calculateScore }
             className="text-center border border-blue-500 text-blue-500 rounded px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-blue-600 focus:outline-none focus:shadow-outline"
-            type="submit"
           >
-            check answers
+            { step == 1 ? 'check answers' : 'finish game' }
           </button>
         </p>
       </div>

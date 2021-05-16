@@ -8,8 +8,8 @@ export default function Nickname() {
     event.preventDefault()
 
     setNickname(event.target.nickname.value)
+    setStep(step + 1)
   }
-
   return (
     <div className="h-screen flex flex-wrap content-center justify-center">
       <div>

@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const GameContext = createContext();
 
 export function GameWrapper({ children }) {
-  const [ step, setStep ] = useState(null)
+  const [ step, setStep ] = useState(0)
   const [ nickname, setNickname ] = useState(null)
   const [ chosenWords, setChosenWords ] = useState([])
   const [ score, setScore ] = useState(0)
