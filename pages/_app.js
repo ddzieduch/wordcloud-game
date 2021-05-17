@@ -1,4 +1,4 @@
-import 'tailwindcss/tailwind.css'
+import '../styles/globals.css'
 import { GameWrapper } from '../context/state'
 
 function MyApp({ Component, pageProps }) {

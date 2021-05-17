@@ -21,6 +21,18 @@ export default function Question(questions) {
   }
 
   const checkAnswers = () => {
+    let chosenWords = document.getElementsByClassName('selected')
+
+    Array.from(chosenWords).forEach((element) => {
+      element.classList.remove('text-gray-500')
+      if (good_words.includes(element.textContent)) {
+        element.classList.add('text-green-500')
+        element.innerHTML = '<i class="status">Good</i>' + element.innerHTML
+      } else {
+        element.classList.add('text-red-500')
+        element.innerHTML = '<i class="status">Bad</i>' + element.innerHTML
+      }
+    })
 
     setStep(step + 1)
   }
@@ -43,11 +55,11 @@ export default function Question(questions) {
       <div>
         <h2 className="text-2xl text-center font-bold my-6">{ question }</h2>
         <div className="md:w-3/5 h-2/3 m-2 mx-auto mb-6 border p-8 md:p-16 border-gray-200 rounded flex flex-wrap sm:space-x-24 font-bold">
-          {all_words.map((word, index) => (
+          { all_words.map((word, index) => (
             <span onClick={checkWord} key={index} className="p-4 relative cursor-pointer">
               { word }
             </span>
-          ))}
+          )) }
         </div>
         <p className="text-center">
           <button

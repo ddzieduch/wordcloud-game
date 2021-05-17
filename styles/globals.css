@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .status {
+    @apply -mt-4 absolute transform -translate-x-1/2 left-1/2 not-italic;
+  }
+  .selected {
+    @apply text-gray-500;
+  }
+}
