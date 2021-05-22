@@ -7,11 +7,11 @@ export default function Question(questions) {
   let question = questions.questions[1].question
   let all_words = questions.questions[1].all_words
   let good_words = questions.questions[1].good_words
-  let bad_words = all_words.filter((word) => good_words.indexOf(word) == -1)
+  let bad_words = all_words.filter((word) => !good_words.includes(word))
 
   const checkWord = (event) => {
     if (step == 1) {
-      if (chosenWords.indexOf(event.target.textContent) == -1) {
+      if (!chosenWords.includes(event.target.textContent)) {
         setChosenWords([...chosenWords, event.target.textContent])
       } else {
         setChosenWords(chosenWords.filter((word) => word != event.target.textContent))
@@ -38,13 +38,9 @@ export default function Question(questions) {
   }
 
   const calculateScore = () => {
-    let wrong_answers = chosenWords.filter((word) => good_words.indexOf(word) == -1)
-    let good_answers = chosenWords.filter((word) => bad_words.indexOf(word) == -1)
-    let omitted_answers = good_words.filter((word) => good_answers.indexOf(word) == -1)
-
-    console.log('Wrong answers ' + wrong_answers)
-    console.log('Good answers ' + good_answers)
-    console.log('Omitted answers ' + omitted_answers)
+    let wrong_answers = chosenWords.filter((word) => !good_words.includes(word))
+    let good_answers = chosenWords.filter((word) => !bad_words.includes(word))
+    let omitted_answers = good_words.filter((word) => !good_answers.includes(word))
 
     setScore(good_answers.length * 2 - (wrong_answers.length + omitted_answers.length))
     setStep(step + 1)
